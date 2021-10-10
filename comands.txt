@@ -1,0 +1,6 @@
+rodando docker p rodar a aplicação
+docker run -p 3333:3333 rentx 
+
+rodando docker compose com flag -d para rodar em background
+docker-compose up -d
+
