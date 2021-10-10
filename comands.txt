@@ -9,3 +9,12 @@ docker-compose up --force-recreate
 
 ver logs do container
 docker logs -f <container_name>
+
+criando migration usando script typeorm criado no package.json
+yarn typeorm migration:create -n <nome_migration>
+
+rodando migrations: 
+yarn typeorm migration:run   
+
+desfazendo migrations: 
+yarn typeorm migration:revert    
