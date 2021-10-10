@@ -4,3 +4,8 @@ docker run -p 3333:3333 rentx
 rodando docker compose com flag -d para rodar em background
 docker-compose up -d
 
+recriando docker compose depois de adicionar algo
+docker-compose up --force-recreate
+
+ver logs do container
+docker logs -f <container_name>
