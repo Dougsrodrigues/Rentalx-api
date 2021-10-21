@@ -8,7 +8,7 @@ import { AppError } from '../../errors/AppError';
 import { router } from './routes';
 
 import '../../container';
-import '../../database';
+import '../database';
 
 const app = express();
 
