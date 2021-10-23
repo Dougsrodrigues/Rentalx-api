@@ -1,0 +1,37 @@
+import { ICreateCarDTO } from '../../dtos/ICreateCarDTO';
+import { Car } from '../../infra/typeorm/entities/Car';
+import { ICarsRepository } from '../ICarsRepository';
+
+export class CarsRepositoryInMemory implements ICarsRepository {
+  cars: Car[] = [];
+
+  async create({
+    name,
+    brand,
+    category_id,
+    license_plate,
+    fine_amount,
+    description,
+    daily_rate,
+  }: ICreateCarDTO): Promise<Car> {
+    const car = new Car();
+
+    Object.assign(car, {
+      name,
+      brand,
+      category_id,
+      license_plate,
+      fine_amount,
+      description,
+      daily_rate,
+    });
+
+    this.cars.push(car);
+
+    return car;
+  }
+
+  async findByLicensePlate(licensePlate: string): Promise<Car> {
+    return this.cars.find((car) => car.license_plate === licensePlate);
+  }
+}
