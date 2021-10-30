@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { inject, injectable } from 'tsyringe';
 
 import { IDayJsProvider } from '../../../../shared/container/providers/DateProvider/IDayJsProvider';
 import { AppError } from '../../../../shared/errors/AppError';
@@ -14,9 +15,13 @@ interface IRequest {
   expected_return_date: Date;
 }
 
+@injectable()
 class CreateRentalUseCase {
   constructor(
+    @inject('DayJsDateProvider')
     private dateProvider: IDayJsProvider,
+
+    @inject('RentalsRepository')
     private rentalsRepository: IRentalsRepository
   ) {}
   async execute({
