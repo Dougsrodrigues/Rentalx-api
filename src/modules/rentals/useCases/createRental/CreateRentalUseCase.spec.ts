@@ -3,21 +3,29 @@ import faker from 'faker';
 
 import { DayJsDateProvider } from '../../../../shared/container/providers/DateProvider/implementations/DayJsDateProvider';
 import { AppError } from '../../../../shared/errors/AppError';
+import { CarsRepositoryInMemory } from '../../../cars/repositories/inMemory/carsRepositoryInMemory';
 import { RentalsRepositoryInMemory } from '../../repositories/in-memory/RentalsRepositoryInMemory';
 import { CreateRentalUseCase } from './CreateRentalUseCase';
 
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
 let createRentalUseCase: CreateRentalUseCase;
 let dayJsProvider: DayJsDateProvider;
+let carsRepositoryInMemory: CarsRepositoryInMemory;
 
 describe('Create Rental', () => {
   const dayAdd24Hours = dayjs().add(1, 'day').toDate();
+
   beforeEach(() => {
+    carsRepositoryInMemory = new CarsRepositoryInMemory();
+
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
+
     dayJsProvider = new DayJsDateProvider();
+
     createRentalUseCase = new CreateRentalUseCase(
       dayJsProvider,
-      rentalsRepositoryInMemory
+      rentalsRepositoryInMemory,
+      carsRepositoryInMemory
     );
   });
 
