@@ -79,6 +79,7 @@
         "tags": ["Category"],
         "summary": "Upload new category",
         "description": "Upload new category",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -106,6 +107,7 @@
         "tags": ["Specifications"],
         "summary": "Create a new specification",
         "description": "Create a new specification",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -167,27 +169,79 @@
             "description": "Email or password incorrect."
           }
         }
-      },
-      "definitions": {
-        "Specifications": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description": {
-              "type": "string"
+      }
+    },
+    "/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Create a car",
+        "description": "Create a new car",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
             }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Car already exists"
+          }
+        }
+      }
+    },
+
+    "definitions": {
+      "Specifications": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
           }
         }
       },
-      "components": {
-        "securitySchemes": {
-          "bearerAuth": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT"
+      "Car": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "daily_rate": {
+            "type": "number"
+          },
+          "license_plate": {
+            "type": "string"
+          },
+          "fine_amount": {
+            "type": "number"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "string"
           }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
         }
       }
     }
