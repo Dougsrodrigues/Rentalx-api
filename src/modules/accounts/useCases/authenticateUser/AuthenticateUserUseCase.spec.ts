@@ -39,12 +39,12 @@ describe('Authenticate User', () => {
   });
 
   it('Should not be able authenticate an nonexistent user', async () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
+    await expect(
+      authenticateUserUseCase.execute({
         email: 'other_email',
         password: 'other_password',
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError('User not found'));
   });
 
   it('Should not be able authenticate if wrong password', async () => {

@@ -30,9 +30,19 @@ describe('Create Rental', () => {
   });
 
   it('Should be able to create a new rental', async () => {
+    const car = await carsRepositoryInMemory.create({
+      name: faker.datatype.string(),
+      description: faker.lorem.paragraph(),
+      daily_rate: faker.datatype.number(),
+      license_plate: faker.random.alphaNumeric(7),
+      fine_amount: faker.datatype.number(),
+      brand: faker.datatype.string(),
+      category_id: '1',
+    });
+
     const rental = await createRentalUseCase.execute({
       user_id: faker.datatype.string(),
-      car_id: faker.datatype.string(),
+      car_id: car.id,
       expected_return_date: dayAdd24Hours,
     });
 
