@@ -6,6 +6,10 @@ import { IDayJsProvider } from '../IDayJsProvider';
 dayjs.extend(utc);
 
 export class DayJsDateProvider implements IDayJsProvider {
+  addDays(days: number): Date {
+    return dayjs().add(days, 'day').toDate();
+  }
+
   convertToUTC(date: Date): string {
     return dayjs(date).utc().local().format();
   }
