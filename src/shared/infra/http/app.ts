@@ -2,6 +2,7 @@ import express, { NextFunction, Response, Request } from 'express';
 import 'express-async-errors';
 import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
+import './loadEnv';
 
 import swaggerFile from '../../../swagger.json';
 import { AppError } from '../../errors/AppError';
