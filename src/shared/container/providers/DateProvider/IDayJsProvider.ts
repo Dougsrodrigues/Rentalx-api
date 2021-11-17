@@ -10,4 +10,5 @@ export interface IDayJsProvider {
   dateNow(): Date;
   addDays(days: number): Date;
   addHours(hours: number): Date;
+  compareDate(start_date: Date, end_date: Date, isBefore: boolean): boolean;
 }
