@@ -1,22 +1,32 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import faker from 'faker';
 
+import { DayJsDateProvider } from '../../../../shared/container/providers/DateProvider/implementations/DayJsDateProvider';
 import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { UsersRepositoryInMemory } from '../../repositories/inMemory/UsersRepositoryInMemory';
+import { UsersTokensRepositoryInMemory } from '../../repositories/inMemory/UsersTokensRepositoryInMemory';
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let usersRepositoryInMemory: UsersRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
+let usersTokensRepositoryInMemory: UsersTokensRepositoryInMemory;
+let dateProvider: DayJsDateProvider;
 
 describe('Authenticate User', () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
+    usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
+    dateProvider = new DayJsDateProvider();
+
     authenticateUserUseCase = new AuthenticateUserUseCase(
-      usersRepositoryInMemory
+      usersRepositoryInMemory,
+      usersTokensRepositoryInMemory,
+      dateProvider
     );
+
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
